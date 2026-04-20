@@ -1,0 +1,217 @@
+/* =============================================================================
+   Churchville Dental Care — Inlined Critical CSS
+   Above-the-fold only. Keep under 14 KB (one TCP round-trip).
+   This file is inlined in <head> by the WordPress plugin.
+   ============================================================================= */
+
+/* Box model reset */
+*,*::before,*::after{box-sizing:border-box}
+
+/* Root */
+html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;color:#2d2d2d;background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* Skip navigation (accessibility + PSI best-practices) */
+.skip-link{position:absolute;top:-40px;left:0;z-index:9999;background:#0057a8;color:#fff;padding:.5rem 1.25rem;border-radius:0 0 4px 0;font-weight:700;text-decoration:none}
+.skip-link:focus{top:0}
+
+/* Typography */
+h1,h2,h3,h4,h5,h6{margin:0 0 .5em;line-height:1.2;font-weight:700}
+h1{font-size:clamp(1.75rem,5vw,2.75rem)}
+h2{font-size:clamp(1.4rem,4vw,2.1rem)}
+h3{font-size:clamp(1.1rem,3vw,1.5rem)}
+p{margin:0 0 1rem}
+a{color:#0057a8;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Images — prevent CLS */
+img{max-width:100%;height:auto;display:block}
+img[width][height]{aspect-ratio:attr(width)/attr(height)}
+
+/* Lazy image fade-in transition */
+img[loading="lazy"]{opacity:0;transition:opacity .35s ease}
+img.loaded{opacity:1}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.site-header,
+header.header,
+#masthead{
+  position:sticky;
+  top:0;
+  z-index:200;
+  width:100%;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  padding:.6rem 1.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+
+.site-logo img,
+.custom-logo{height:52px;width:auto}
+
+/* Top contact bar (phone/hours) */
+.top-bar{
+  background:#0057a8;
+  color:#fff;
+  font-size:.85rem;
+  text-align:center;
+  padding:.35rem 1rem;
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.top-bar a{color:#fff;font-weight:600}
+.top-bar a:hover{text-decoration:underline}
+
+/* ── Navigation ──────────────────────────────────────────────────────────── */
+.nav-primary,
+.main-navigation ul{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.nav-primary a,
+.main-navigation a{
+  font-weight:600;
+  color:#2d2d2d;
+  font-size:.9rem;
+  white-space:nowrap;
+  transition:color .2s;
+}
+.nav-primary a:hover,
+.main-navigation a:hover{color:#0057a8;text-decoration:none}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn,
+.button,
+.wp-block-button__link,
+.cta-btn,
+input[type="submit"]{
+  display:inline-block;
+  padding:.65rem 1.5rem;
+  background:#0057a8;
+  color:#fff !important;
+  border:none;
+  border-radius:4px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  text-align:center;
+  white-space:nowrap;
+  transition:background .2s, transform .1s;
+  text-decoration:none;
+}
+.btn:hover,
+.button:hover,
+.wp-block-button__link:hover{background:#003d78;transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:#0057a8 !important;border:2px solid #0057a8}
+.btn-secondary:hover{background:#0057a8;color:#fff !important}
+
+/* Phone CTA */
+.phone-cta{
+  font-size:1.1rem;
+  font-weight:700;
+  color:#0057a8;
+  white-space:nowrap;
+}
+.phone-cta::before{content:"📞 ";font-style:normal}
+
+/* ── Hero / Banner ───────────────────────────────────────────────────────── */
+.hero,
+.hero-section,
+.banner,
+#hero{
+  position:relative;
+  min-height:380px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  background:#0057a8;
+  color:#fff;
+}
+
+.hero-img,
+.hero > img,
+.banner > img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 30%;
+  /* LCP image — do not lazy load */
+  loading:eager;
+  fetchpriority:high;
+}
+
+/* Overlay to ensure text contrast (accessibility) */
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(0,60,120,.6) 0%,rgba(0,20,60,.3) 100%);
+  pointer-events:none;
+}
+
+.hero-content,
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+  padding:2.5rem 1.25rem;
+}
+.hero h1{color:#fff;margin-bottom:1rem;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.hero p{color:rgba(255,255,255,.9);font-size:1.1rem;margin-bottom:1.5rem}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  .site-header{flex-wrap:wrap;padding:.5rem 1rem}
+  .site-logo img,.custom-logo{height:42px}
+  .nav-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:.5rem;
+    margin-left:auto;
+  }
+  .nav-primary,
+  .main-navigation ul{
+    display:none;
+    flex-direction:column;
+    width:100%;
+    gap:0;
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    border-top:1px solid #eee;
+    padding:.5rem 0;
+  }
+  .nav-primary.open,
+  .main-navigation.toggled ul{display:flex}
+  .nav-primary a,
+  .main-navigation a{padding:.75rem 1.25rem;width:100%;display:block}
+  .hero,.hero-section,.banner,#hero{min-height:260px}
+  .hero-content,.hero-inner{padding:1.5rem 1rem}
+  .phone-cta{font-size:1rem}
+  .top-bar{gap:.75rem;font-size:.8rem}
+}
+
+@media(min-width:769px){
+  .nav-toggle{display:none}
+}
+
+/* ── Font display: swap fallback ─────────────────────────────────────────── */
+/* Apply system font until web font loads to avoid invisible text */
+body{font-display:swap}
+.fonts-loaded body{font-family:'Open Sans',Arial,sans-serif}

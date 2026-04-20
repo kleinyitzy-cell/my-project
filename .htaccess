@@ -1,0 +1,150 @@
+# =============================================================================
+# Churchville Dental Care — Apache Performance Configuration
+# Targets: PageSpeed 90+ mobile | Eliminates all server-side Lighthouse issues
+# =============================================================================
+
+# ─── Core WordPress rewrite (keep at top) ─────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+</IfModule>
+
+# ─── Force HTTPS ──────────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ─── Compression (Brotli preferred, gzip fallback) ────────────────────────────
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS \
+        text/html text/plain text/xml text/css \
+        text/javascript application/javascript application/x-javascript \
+        application/json application/xml application/xhtml+xml \
+        image/svg+xml font/ttf font/otf font/woff font/woff2
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE \
+        text/html text/plain text/xml text/css \
+        text/javascript application/javascript application/x-javascript \
+        application/json application/xml application/xhtml+xml \
+        image/svg+xml font/ttf font/otf font/woff font/woff2
+
+    # Prevent compression of already-compressed formats
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|woff2?|gz|zip|bz2)$ no-gzip dont-vary
+    Header append Vary Accept-Encoding env=!dont-vary
+</IfModule>
+
+# ─── Browser Caching ──────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Default fallback
+    ExpiresDefault                              "access plus 1 month"
+
+    # HTML — short cache, always revalidate
+    ExpiresByType text/html                     "access plus 0 seconds"
+
+    # CSS & JS — 1 year (cache-busted via query strings from WordPress)
+    ExpiresByType text/css                      "access plus 1 year"
+    ExpiresByType application/javascript        "access plus 1 year"
+    ExpiresByType text/javascript               "access plus 1 year"
+
+    # Images — 1 year
+    ExpiresByType image/jpeg                    "access plus 1 year"
+    ExpiresByType image/png                     "access plus 1 year"
+    ExpiresByType image/gif                     "access plus 1 year"
+    ExpiresByType image/webp                    "access plus 1 year"
+    ExpiresByType image/avif                    "access plus 1 year"
+    ExpiresByType image/svg+xml                 "access plus 1 year"
+    ExpiresByType image/x-icon                  "access plus 1 year"
+
+    # Fonts — 1 year
+    ExpiresByType font/woff2                    "access plus 1 year"
+    ExpiresByType font/woff                     "access plus 1 year"
+    ExpiresByType application/font-woff2        "access plus 1 year"
+    ExpiresByType application/font-woff         "access plus 1 year"
+
+    # Video / audio
+    ExpiresByType video/mp4                     "access plus 1 year"
+    ExpiresByType audio/mpeg                    "access plus 1 year"
+</IfModule>
+
+# ─── Cache-Control headers ────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    # CSS, JS, images, fonts — immutable where versioned
+    <FilesMatch "\.(css|js|woff2?|ttf|otf|eot|svg|jpg|jpeg|png|gif|webp|avif|ico|mp4)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # HTML — no-cache so fresh pages are served
+    <FilesMatch "\.html?$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+
+    # Remove ETags (redundant with Cache-Control above)
+    Header unset ETag
+
+    # Security headers (also help PSI "Best Practices" audit)
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+</IfModule>
+
+FileETag None
+
+# ─── Keep-Alive ───────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+
+<IfModule mod_so.c>
+    <IfModule mod_http2.c>
+        Protocols h2 h2c http/1.1
+    </IfModule>
+</IfModule>
+
+# ─── MIME types for modern formats ────────────────────────────────────────────
+<IfModule mod_mime.c>
+    AddType image/webp         .webp
+    AddType image/avif         .avif
+    AddType font/woff2         .woff2
+    AddType font/woff          .woff
+    AddType application/json   .json
+    AddType video/mp4          .mp4
+</IfModule>
+
+# ─── WebP / AVIF serving (serve webp/avif if browser supports & file exists) ──
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_ACCEPT} image/avif
+    RewriteCond %{REQUEST_FILENAME}.avif -f
+    RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.avif [T=image/avif,E=accept:1,L]
+
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME}.webp -f
+    RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.webp [T=image/webp,E=accept:1,L]
+</IfModule>
+<IfModule mod_headers.c>
+    Header append Vary Accept env=accept
+</IfModule>
+
+# ─── Block bad bots & scrapers ────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (MJ12bot|AhrefsBot|SemrushBot|DotBot|BLEXBot) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ─── Protect sensitive files ──────────────────────────────────────────────────
+<FilesMatch "^(wp-config\.php|\.env|readme\.html|license\.txt|xmlrpc\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ─── Prevent directory browsing ───────────────────────────────────────────────
+Options -Indexes
