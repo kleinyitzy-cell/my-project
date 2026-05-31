@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goodbye Party – Sarah & Chana'lee</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@700&family=DM+Sans:ital,wght@0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #f0e9ff;
+      background: #c8f560;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,363 +19,401 @@
     }
 
     .flyer {
-      width: 680px;
-      background: #fffdf8;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(80,40,120,0.18);
+      width: 700px;
+      background: #c8f560;
       position: relative;
+      padding: 50px 48px 54px;
+      overflow: visible;
     }
 
-    /* ── top color band ── */
-    .band {
-      background: linear-gradient(135deg, #f7b2d9 0%, #c9a7f5 50%, #a5c8f7 100%);
-      padding: 44px 48px 36px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .band::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 40px;
-      background: #fffdf8;
-      clip-path: ellipse(55% 100% at 50% 100%);
-    }
-
-    /* subtle grain on band */
-    .band::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .kicker {
+    /* ── sticker helper ── */
+    .sticker {
       display: inline-block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
+      background: white;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      color: #6b3fa0;
-      background: rgba(255,255,255,0.55);
-      padding: 5px 14px;
-      border-radius: 30px;
-      margin-bottom: 18px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
     }
 
-    .headline {
-      font-family: 'Playfair Display', serif;
-      font-size: 58px;
-      font-weight: 700;
-      color: #2d1850;
-      line-height: 1.05;
+    /* ── top row ── */
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .sticker-bye {
+      background: #ff3cac;
+      color: white;
+      transform: rotate(-4deg);
+    }
+
+    .sticker-summer {
+      background: #fff;
+      color: #111;
+      transform: rotate(3deg);
+    }
+
+    /* ── big title ── */
+    .title-block {
       margin-bottom: 6px;
     }
 
-    .headline em {
-      font-style: italic;
-      font-weight: 400;
-      color: #6b3fa0;
+    .title-line1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 118px;
+      color: #111;
+      line-height: 0.88;
+      letter-spacing: -2px;
     }
 
-    .tagline {
-      font-family: 'Satisfy', cursive;
-      font-size: 21px;
-      color: #4a2a7a;
-      opacity: 0.85;
-      margin-top: 8px;
+    .title-line2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 118px;
+      color: white;
+      line-height: 0.88;
+      letter-spacing: -2px;
+      -webkit-text-stroke: 3px #111;
     }
 
-    /* ── body ── */
-    .body {
-      padding: 40px 48px 44px;
+    .title-line3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 118px;
+      color: #ff3cac;
+      line-height: 0.88;
+      letter-spacing: -2px;
     }
 
-    /* names */
-    .names-section {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      margin-bottom: 36px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(160,100,220,0.12);
-    }
-
-    .name-half {
-      flex: 1;
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .name-half.left  { background: linear-gradient(135deg, #fce4f3, #f7c8e8); }
-    .name-half.right { background: linear-gradient(135deg, #dce8ff, #cbbdff); }
-
-    .name-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #9a6bc0;
-      margin-bottom: 4px;
-    }
-    .name-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 34px;
-      font-weight: 700;
-      color: #2d1850;
-      line-height: 1.1;
-    }
-    .name-subtext {
-      font-size: 13px;
-      color: #7a5a99;
-      margin-top: 3px;
-    }
-
-    .name-divider {
-      width: 2px;
-      background: rgba(255,255,255,0.7);
-    }
-
-    /* section header */
-    .section-head {
+    /* ── names row ── */
+    .names-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin: 20px 0 22px;
+      flex-wrap: wrap;
     }
-    .section-head span {
-      font-size: 11px;
+
+    .name-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #111;
+      background: white;
+      padding: 4px 22px 6px;
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 #111;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .name-tag.pink {
+      background: #ff3cac;
+      color: white;
+      transform: rotate(-1.5deg);
+    }
+
+    .name-tag.green {
+      background: #111;
+      color: #c8f560;
+      transform: rotate(1deg);
+    }
+
+    .and-text {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
       font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #9a6bc0;
-    }
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, #d4b0f5, transparent);
+      color: #111;
     }
 
-    /* details row */
-    .details-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    /* ── sub line ── */
+    .sub-line {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
       margin-bottom: 28px;
+      opacity: 0.8;
     }
 
-    .detail-pill {
-      background: #f7f2ff;
-      border: 1.5px solid #e2d2fa;
-      border-radius: 14px;
-      padding: 14px 18px;
+    /* ── divider tape ── */
+    .tape {
+      height: 30px;
+      background: #ff3cac;
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .detail-pill.full { grid-column: span 2; }
-
-    .pill-icon {
-      width: 38px; height: 38px;
-      background: linear-gradient(135deg, #e8d5ff, #f9c8e8);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 19px;
-      flex-shrink: 0;
-    }
-
-    .pill-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #b08ad0;
-      margin-bottom: 3px;
-    }
-
-    .pill-value {
-      font-size: 15px;
-      font-weight: 500;
-      color: #3d2060;
-    }
-
-    /* note / vibe box */
-    .vibe-box {
-      background: linear-gradient(135deg, #fef3fb, #f0e8ff);
-      border-radius: 16px;
-      padding: 20px 24px;
+      justify-content: center;
+      gap: 28px;
       margin-bottom: 28px;
-      border-left: 4px solid #c9a7f5;
+      overflow: hidden;
+      transform: rotate(-0.6deg);
     }
 
-    .vibe-box p {
-      font-size: 15.5px;
-      color: #4a2a7a;
-      line-height: 1.65;
-    }
-
-    .vibe-box p strong {
-      color: #7c3fb5;
-    }
-
-    /* rsvp */
-    .rsvp-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #2d1850;
-      border-radius: 14px;
-      padding: 18px 24px;
-      margin-bottom: 26px;
-    }
-
-    .rsvp-left {
-      display: flex; flex-direction: column; gap: 3px;
-    }
-    .rsvp-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
+    .tape span {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #c9a7f5;
-    }
-    .rsvp-value {
-      font-family: 'Satisfy', cursive;
-      font-size: 20px;
-      color: #fff;
-    }
-
-    .rsvp-badge {
-      background: linear-gradient(135deg, #f7b2d9, #c9a7f5);
-      color: #2d1850;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 8px 18px;
-      border-radius: 30px;
+      color: white;
       white-space: nowrap;
     }
 
-    /* footer */
-    .footer {
-      text-align: center;
-      font-size: 13px;
-      color: #b08ad0;
-      letter-spacing: 0.5px;
-      padding-top: 4px;
+    /* ── info cards ── */
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
     }
 
-    .footer strong {
-      color: #7c3fb5;
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 2.5px solid #111;
+      box-shadow: 5px 5px 0 #111;
+      position: relative;
     }
 
-    /* floating emojis in band */
-    .float {
+    .info-card.full { grid-column: span 2; }
+    .info-card.pink-card { background: #ff3cac; }
+    .info-card.dark-card { background: #111; }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .info-card.pink-card .card-label { color: rgba(255,255,255,0.7); }
+    .info-card.dark-card .card-label { color: rgba(200,245,96,0.7); }
+
+    .card-icon { font-size: 22px; margin-bottom: 4px; }
+
+    .card-value {
+      font-size: 20px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1.2;
+    }
+    .info-card.pink-card .card-value { color: white; }
+    .info-card.dark-card .card-value { color: #c8f560; }
+
+    /* corner emoji stickers on cards */
+    .corner {
       position: absolute;
-      font-size: 26px;
+      font-size: 22px;
+      top: -12px;
+      right: -10px;
+      transform: rotate(10deg);
+    }
+
+    /* ── vibe text ── */
+    .vibe-text {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: #111;
+      background: white;
+      border: 2.5px solid #111;
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #111;
+      padding: 16px 22px;
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
+    /* ── rsvp row ── */
+    .rsvp-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #111;
+      border-radius: 16px;
+      padding: 16px 22px;
+      border: 2.5px solid #111;
+      box-shadow: 5px 5px 0 #ff3cac;
+    }
+
+    .rsvp-emoji { font-size: 30px; }
+
+    .rsvp-text { flex: 1; }
+    .rsvp-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(200,245,96,0.7);
+      margin-bottom: 3px;
+    }
+    .rsvp-value {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .rsvp-btn {
+      background: #c8f560;
+      color: #111;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 10px 20px;
+      border-radius: 30px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    /* ── bottom row ── */
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .bottom-note {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
       opacity: 0.75;
     }
 
+    /* floating sticker elements */
+    .float-sticker {
+      position: absolute;
+      transform: rotate(var(--r, 0deg));
+      user-select: none;
+    }
+
+    .circle-stamp {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #111;
+      text-align: center;
+      line-height: 1.4;
+      box-shadow: 3px 3px 0 #111;
+    }
+    .circle-stamp .stamp-big {
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
     @media print {
-      body { background: white; padding: 0; }
-      .flyer { box-shadow: none; border-radius: 0; width: 100%; }
+      body { background: #c8f560; padding: 0; }
+      .flyer { box-shadow: none; }
     }
   </style>
 </head>
 <body>
 <div class="flyer">
 
-  <!-- top band -->
-  <div class="band">
-    <span class="float" style="top:18px;right:52px;transform:rotate(12deg)">🌸</span>
-    <span class="float" style="top:55px;right:24px;transform:rotate(-8deg)">✨</span>
-    <span class="float" style="bottom:50px;right:44px;transform:rotate(5deg)">🫧</span>
-    <span class="float" style="top:22px;right:110px;transform:rotate(-14deg)">🌿</span>
-
-    <div class="kicker">a goodbye to remember</div>
-    <div class="headline">See You<br><em>Later,</em> Girls 🤍</div>
-    <div class="tagline">a summer send-off party for two of the best</div>
+  <!-- floating sticker top right -->
+  <div class="float-sticker" style="top:-14px;right:-10px;--r:8deg;">
+    <div class="circle-stamp">
+      <div class="stamp-big">🌸</div>
+      summer<br>2025
+    </div>
   </div>
 
-  <!-- body -->
-  <div class="body">
-
-    <!-- names -->
-    <div class="names-section">
-      <div class="name-half left">
-        <div class="name-label">Honoring</div>
-        <div class="name-text">Sarah</div>
-        <div class="name-subtext">we'll miss you so much 🌷</div>
-      </div>
-      <div class="name-divider"></div>
-      <div class="name-half right">
-        <div class="name-label">Honoring</div>
-        <div class="name-text">Chana'lee</div>
-        <div class="name-subtext">always in our hearts 💜</div>
-      </div>
-    </div>
-
-    <!-- event details -->
-    <div class="section-head">
-      <span>Event Details</span>
-      <div class="section-line"></div>
-    </div>
-
-    <div class="details-row">
-      <div class="detail-pill">
-        <div class="pill-icon">📅</div>
-        <div>
-          <div class="pill-label">Date</div>
-          <div class="pill-value">[ add date ]</div>
-        </div>
-      </div>
-      <div class="detail-pill">
-        <div class="pill-icon">⏰</div>
-        <div>
-          <div class="pill-label">Time</div>
-          <div class="pill-value">[ add time ]</div>
-        </div>
-      </div>
-      <div class="detail-pill full">
-        <div class="pill-icon">📍</div>
-        <div>
-          <div class="pill-label">Location</div>
-          <div class="pill-value">[ add address / location ]</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- vibe note -->
-    <div class="vibe-box">
-      <p>
-        Come celebrate two <strong>incredible girls</strong> before they head off to their next chapter.
-        Good music, good food, and even better company —
-        let's make it a night they'll never forget. 🎶🍓✨
-      </p>
-    </div>
-
-    <!-- rsvp -->
-    <div class="rsvp-bar">
-      <div class="rsvp-left">
-        <div class="rsvp-label">RSVP by</div>
-        <div class="rsvp-value">[ add RSVP date &amp; contact ]</div>
-      </div>
-      <div class="rsvp-badge">Let us know you're coming →</div>
-    </div>
-
-    <!-- footer -->
-    <div class="footer">
-      <strong>Dress code:</strong> summer vibes only &nbsp;·&nbsp; 🌴 bring good energy 🌴
-    </div>
-
+  <!-- top stickers row -->
+  <div class="top-row">
+    <span class="sticker sticker-bye">✈️ she's leaving!</span>
+    <span class="sticker sticker-summer">🌞 it's giving main character</span>
   </div>
+
+  <!-- big headline -->
+  <div class="title-block">
+    <div class="title-line1">SEE YOU</div>
+    <div class="title-line2">LATER</div>
+    <div class="title-line3">BESTIE 🫶</div>
+  </div>
+
+  <!-- names -->
+  <div class="names-row">
+    <div class="name-tag pink">Sarah</div>
+    <div class="and-text">&amp;</div>
+    <div class="name-tag green">Chana'lee</div>
+    <span style="font-size:28px">💅✨</span>
+  </div>
+
+  <div class="sub-line">we're throwing the biggest send-off for our girls 🎀</div>
+
+  <!-- pink tape -->
+  <div class="tape">
+    <span>goodbye party</span>
+    <span>✦</span>
+    <span>goodbye party</span>
+    <span>✦</span>
+    <span>goodbye party</span>
+    <span>✦</span>
+    <span>goodbye party</span>
+    <span>✦</span>
+    <span>goodbye party</span>
+    <span>✦</span>
+  </div>
+
+  <!-- info cards -->
+  <div class="info-row">
+    <div class="info-card">
+      <div class="card-icon">📅</div>
+      <div class="card-label">when</div>
+      <div class="card-value">[ add date ]</div>
+      <span class="corner">🌟</span>
+    </div>
+    <div class="info-card pink-card">
+      <div class="card-icon">⏰</div>
+      <div class="card-label">time</div>
+      <div class="card-value">[ add time ]</div>
+      <span class="corner">🎀</span>
+    </div>
+    <div class="info-card dark-card full">
+      <div class="card-icon">📍</div>
+      <div class="card-label">the spot</div>
+      <div class="card-value">[ add address / location ]</div>
+      <span class="corner">🗺️</span>
+    </div>
+  </div>
+
+  <!-- vibe note -->
+  <div class="vibe-text">
+    come say goodbye to two of the most iconic girls we know 💗<br>
+    bring good vibes, your best fit, and all the love — it's gonna be everything ✨🍓
+  </div>
+
+  <!-- rsvp -->
+  <div class="rsvp-row">
+    <div class="rsvp-emoji">📲</div>
+    <div class="rsvp-text">
+      <div class="rsvp-label">RSVP by</div>
+      <div class="rsvp-value">[ add date &amp; contact ]</div>
+    </div>
+    <div class="rsvp-btn">lmk you're coming →</div>
+  </div>
+
+  <!-- bottom -->
+  <div class="bottom-row">
+    <div class="bottom-note">dress code: your most ✨ summer fit</div>
+    <div style="font-size:26px">🌴🍉🌸</div>
+  </div>
+
 </div>
 </body>
 </html>
